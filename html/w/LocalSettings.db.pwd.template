@@ -3,3 +3,6 @@ $wgDBserver         = "localhost";
 $wgDBname           = "wikidb";
 $wgDBuser           = "wikidb";
 $wgDBpassword       = "password";
+
+# For better performance, change the value below to a fixed random number
+$wgSecretKey = md5($wgDBuser + $wgDBpassword);

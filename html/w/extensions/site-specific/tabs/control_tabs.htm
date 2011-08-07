@@ -1,0 +1,365 @@
+<html>
+	<head>
+		<title>Control.Tabs : Unobtrusive CSS Tabs for Prototype</title>
+		<link rel="stylesheet" href="http://livepipe.net/styles/screen.css"/>
+		<script src="http://livepipe.net/scripts/prototype.js"></script>
+		<script src="http://livepipe.net/scripts/syntax.js"></script>
+		<script src="http://livepipe.net/scripts/live_search.js"></script>
+		<script src="http://livepipe.net/downloads/object.event.1.0.0.js"></script>
+		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+		<script type="text/javascript">_uacct = "UA-176241-1"; urchinTracker();</script>
+		<link rel="alternate" title="Control.Tabs Change Log" href="http://livepipe.net/projects/control_tabs/changelog.rss" type="application/rss+xml">
+					<script src="http://livepipe.net/downloads/control.tabs.2.0.0.RC2.js"></script>
+		<script>
+			Event.observe(window,'load',function(){
+				new Control.LiveSearch('search',{
+					container: 'main_container',
+					altColor: '#666',
+					updateUrl: '/search',
+					updateParameterName: 'query'
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="outer_container">
+			<div id="container">
+				<div id="header">
+					<h2><a href="http://livepipe.net/"><span>LivePipe&trade;</span></a></h2>
+					<ul id="navigation">
+						<li><a href="http://livepipe.net/">Home</a></li>
+						<li><a href="http://livepipe.net/blog/">Blog</a></li>
+						<li class="active"><a href="http://livepipe.net/projects/">Projects</a></li>
+						<li><a href="http://livepipe.net/community/">Forum</a></li>
+						<li><a href="http://livepipe.net/contact">Contact</a></li>
+													<li><a href="http://livepipe.net/members/login">Login</a></li>
+											</ul>
+				</div>
+				<div id="main">
+										<input id="search" type="search" value="Search"/>
+					<ul id="subnavigation">
+	<li class="first"><a href="http://livepipe.net/projects/picora/">Picora&trade;</a></li>
+	<li class="active"><a href="http://livepipe.net/projects/control_suite/">Control Suite</li>
+	<li><a href="http://livepipe.net/projects/object_event/">Object.Event</li>
+	<li><a href="http://livepipe.net/projects/event_behavior/">Event.Behavior</a></li>
+	<li><a href="http://livepipe.net/projects/photo_folder/">PhotoFolder</a></li>
+	<li><a href="http://livepipe.net/projects/prototype_tidbits/">Prototype.Tidbits</a></li>	
+</ul>					<div id="sidebar">	<a class="button" href="http://livepipe.net/downloads/control.tabs.2.1.1.js"><span>Download 2.1.1</span></a><ul>
+		<li class="active"><a href="http://livepipe.net/projects/control_tabs/">Control.Tabs</a></li>
+		<li><a href="http://livepipe.net/projects/control_modal/">Control.Modal</a></li>
+		<li><a href="http://livepipe.net/projects/control_textarea/">Control.TextArea</a></li>
+		<li><a href="http://livepipe.net/projects/control_select_multiple/">Control.SelectMultiple</a></li>
+		<li><a href="http://livepipe.net/projects/control_rating/">Control.Rating</a></li>
+		<li><a href="http://livepipe.net/projects/control_progress_bar/">Control.ProgressBar</a></li>
+	</ul>
+</div>					<div id="main_container">
+						
+<h1>Control.Tabs</h1>
+<p class="introduction">Unobtrusive CSS tabs for <a href="http://prototypejs.org/">Prototype.js</a></p>
+
+<ul class="subsection_tabs" id="main_tabs" style="clear:none;">
+	<li><a href="#tutorial">Tutorial</a></li>
+	<li><a href="#api">API</a></li>
+	<li><a href="#resources">Resources</a></li>
+</ul>
+
+<div id="tutorial">
+	<h3>Introduction &amp; Examples</h3>
+	<p>Control.Tabs attaches creates a tabbed interface from an unordered list of links/anchors that point to any elements on your page that have an id attribute. Since it attaches these behaviors to HTML that already has semantic meaning, it will degrade gracefully for browsers that do not support JavaScript, and is search engine friendly. It attaches in one line of code for simple use cases, but is highly customizable and can be used in a variety of edge cases.</p>
+	<!-- begin example 1 code -->
+	<ul id="tabs_example_one" class="subsection_tabs">
+		<li><a href="#one">One</a></li>
+		<li><a href="#two">Two</a></li>
+	</ul>
+	<div id="one"><p>This is the simplest example of a set of tabs.</p></div>
+	<div id="two"><p>Note that the styling for the tabs is done with CSS, not the Control.Tabs script.</p></div>
+	<script>
+		new Control.Tabs('tabs_example_one');
+	</script>
+	<!-- end example 1 code -->
+		
+	<!-- begin example 2 code -->
+	<ul id="tabs_example_two" class="subsection_tabs">
+		<li><a href="#a">One</a></li>
+		<li><a href="#b">Two</a></li>
+		<li><a href="#c">Three</a></li>
+		<li><a href="#d">Four</a></li>
+	</ul>
+	<div id="a"><p>This example demonstrates scripting a Control.Tabs instance. Try clicking the links below, or changing the select box.</p></div>
+	<div id="b"><p>I am the second tab.</p></div>
+	<div id="c"><p>I am the third tab.</p></div>
+	<div id="d"><p>I am the fourth tab.</p></div>
+	<a href="" id="tabs_example_two_first" style="margin-right:10px;">&laquo;</a>
+	<a href="" id="tabs_example_two_previous" style="margin-right:10px;">&larr;</a>
+	<select id="tabs_example_two_select" style="margin-right:10px;">
+		<option value="a">One</option>
+		<option value="b">Two</option>
+		<option value="c">Three</option>
+		<option value="d">Four</option>
+	</select>
+	<a href="" id="tabs_example_two_next" style="margin-right:10px;">&rarr;</a>
+	<a href="" id="tabs_example_two_last">&raquo;</a>
+	<script>
+		var tabs_example_two = new Control.Tabs('tabs_example_two',{
+			afterChange: function(new_container){
+				$A($('tabs_example_two_select').options).each(function(option,i){
+					if(option.value == new_container.id){
+						$('tabs_example_two_select').options.selectedIndex = i;
+						throw $break;
+					}
+				});
+			}
+		});
+		$('tabs_example_two_select').observe('change',function(){
+			tabs_example_two.setActiveTab($('tabs_example_two_select').options[$('tabs_example_two_select').options.selectedIndex].value);
+		});
+		$('tabs_example_two_first').observe('click',function(event){
+			this.first();
+			Event.stop(event);
+		}.bindAsEventListener(tabs_example_two));
+		$('tabs_example_two_previous').observe('click',function(event){
+			this.previous();
+			Event.stop(event);
+		}.bindAsEventListener(tabs_example_two));
+		$('tabs_example_two_next').observe('click',function(event){
+			this.next();
+			Event.stop(event);
+		}.bindAsEventListener(tabs_example_two));
+		$('tabs_example_two_last').observe('click',function(event){
+			this.last();
+			Event.stop(event);
+		}.bindAsEventListener(tabs_example_two));
+	</script>
+	<!-- end example 2 code -->
+	<p>Control.Tabs is fully programmable, so in the example above the links are programmed to change which tab is active, and an event handler is registered to change the select box (and visa versa). The tabs can also be trigged via hovering, and need not even look like tabs. The example below use images instead of divs, and the "hover" option. See the <a href="#api">API section</a> for more details. </p>
+	<style>
+		.tabbed_images {
+			list-style:none;
+			margin:0;
+			padding:0;
+			clear:both;
+		}
+		
+		.tabbed_images li {
+			list-style:none;
+			float:left;
+			margin:0;
+			padding:0;
+		}
+		
+		.tabbed_images li a {
+			border:1px solid #ccc;
+			display:block;
+			float:left;
+			margin:0 10px 0 0;
+		}
+		
+		.tabbed_images li a.active,
+		.tabbed_images li a:hover {
+			border:1px solid #333;
+		}
+		
+		.tabbed_images li a img {
+			border:none;
+			padding:2px;
+			margin:0;
+		}
+		
+		#image_1,
+		#image_2,
+		#image_3,
+		#image_4,
+		#image_5 {
+			margin-top:10px;
+			padding:2px;
+			border:1px solid #ccc;
+		}
+	</style>
+	
+	<!-- begin example 3 code -->
+	<ul class="tabbed_images" id="tabs_example_3">
+		<li><a href="#image_1"><img src="http://livepipe.net/styles/sample_images/tabs_example_1_small.jpg"/></a></li>
+		<li><a href="#image_2"><img src="http://livepipe.net/styles/sample_images/tabs_example_2_small.jpg"/></a></li>
+		<li><a href="#image_3"><img src="http://livepipe.net/styles/sample_images/tabs_example_3_small.jpg"/></a></li>
+		<li><a href="#image_4"><img src="http://livepipe.net/styles/sample_images/tabs_example_4_small.jpg"/></a></li>
+	</ul>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_1_big.jpg" id="image_1"/>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_2_big.jpg" id="image_2"/>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_3_big.jpg" id="image_3"/>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_4_big.jpg" id="image_4"/>
+	<script>
+		new Control.Tabs('tabs_example_3',{
+			hover: true
+		})
+	</script>
+	<!-- begin example 3 code -->
+	
+	<p>View source on the examples above to learn more about their inner workings. <b>Each code block beings with a comment such as &lt;!-- begin example 2 code --&gt;</b></p>
+	
+	<h3>Sample HTML</h3>
+<pre class="highlighted"><code>&lt;ul id=&quot;tab_group_one&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;#one&quot;&gt;One&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#two&quot;&gt;Two&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&quot;one&quot;&gt;&lt;p&gt;I am the content for tab one.&lt;/p&gt;&lt;/div&gt;
+&lt;div id=&quot;two&quot;&gt;&lt;p&gt;I am the content for tab two.&lt;/p&gt;&lt;/div&gt;
+&lt;script&gt;
+    new Control.Tabs('tab_group_one');
+&lt;/script&gt;</code></pre>	
+	<p>Note that this example doesn't have an style information. If you want the CSS used on this page, view source to find the stylesheet, and then look for ".subsection_tabs"</p>
+	
+	<h3>Creating Control.Tabs Instances by Class Name</h3>
+	<p>In the above example above the tab list has an id attribute. The constructor for control tabs can take any element object, or id string, so if you assigned each list a class of "tabs", you could do the following instead.</p>
+<pre class="highlighted"><code class="javascript">document.getElementsByClassName('tabs').each(function(tab_group){
+    new Control.Tabs(tab_group);
+});</code></pre>
+
+	<h3>Linking to Tabs from Other Pages</h3>
+	<p>If you need to have a tab pre selected, just link to it as you would any other page with an element id in it. For instance, open this url in a new window: <b>http://livepipe.net/projects/control_tabs/#api</b>. The API tab on this page will now be selected. If you need to have multiple tabs pre selected (i.e, if you have multiple tab sets on a page), separate their names with commas, try "#two,four" for instance. <b>This overrides the defaultTab option.</b></p>
+
+	<h3>Linking to Other Pages within a Tab Set</h3>
+	<p>If a link in a list of tabs does not begin with with "#" it will not be included in the tab list. This means you can mix and match on page tab links and external links as you please.</p>
+
+	<h3>Linking to a Tab on the Same Page Outside the Tab List</h3>
+	<p>By default, links pointing to a tab container outside of the list of tabs, will set the active tab. You can turn this off by specifying the option "autoLinkExternal" as false. For example the following link points to the API section of this page (HTML &lt;a href="#api"&gt;API&lt/a&gt;) : <a href="#api">API</a></p>
+	
+	<h3>Flash of Unstyled Content Problem (FOUC)</h3>
+	<p>A common problem in larger pages is that the Control.Tabs script, Prototype.js, or other assets may take some time to load. While they are loading, The active tab will not be set. On this page for example, #tutorial starts as the active tab. If this page takes a long time to load, all three tabs will be shown. If we manually write in style="display:none;" onto the other two tabs, browsers without JavaScript will never see them. A not entirely endorsed (but perfectly functional) solution is to use document.write() to create style information that hides the other tabs. This <b>must be on the page</b> and not in a library or external file. This way non JavaScript browsers still see all the content, and the rest of us see the tabs as intended.</p>
+<pre class="highlighted"><code class="javascript">&lt;script&gt;document.write('&lt;style&gt;#api, #resources { display:none; }&lt;/style&gt;');&lt;/script&gt;</code></pre>
+</div>
+
+<div id="api">
+	<h3>How to Read the API Table</h3>
+	<p>A "Class Method or Property" is often referred to in other languages as a <b>static</b> method or property. The "instances" property would be referenced as "Control.Tabs.instances". An "Instance Method or Property" refers to something that is available to each  instance of the class. For example, the "setActiveTab" would be referenced like so: "var my_tabs = new Control.Tabs(); my_tabs.setActiveTab();". Anything in the method and property lists that ends with "()" is a method, and anything that doesn't is a property. All events are specifiable in the options hash, or via "observe()" if <a href="http://livepipe.net/projects/object_event/">Object.Event</a> has been included on the page before Control.Tabs was. In a method signature, each argument is separated by a comma, if the words are lower case it refers to the data type and gives a hint to what it is used for, if there is an upper case word it refers to the class of object that must be used. Arguments with [square brackets] around them are optional.</p>
+	<h3>Class Methods and Properties</h3>
+	<table cellpadding="0" cellspacing="0" width="100%" class="api_table">
+		<thead>
+			<tr><td>Return</td><td>Name</td><td>Description</td></tr>
+		</thead>
+		<tbody>
+			<tr class="even"><td>array</td><td><b>instances</b></td><td>All created Control.Tabs instances.</td></tr>
+			<tr class="odd"><td>object || false</td><td><b>findByTabId(string element_id)</b></td><td>Find an instance by any container id that it contains.</td></tr>
+		</tbody>
+	</table>
+	
+	<h3>Instance Methods and Properties</h3>
+	<table cellpadding="0" cellspacing="0" width="100%" class="api_table">
+		<thead>
+			<tr><td>Return</td><td>Name</td><td>Description</td></tr>
+		</thead>
+		<tbody>
+			<tr class="even"><td>object</td><td><b>initialize(mixed element_id[,options Hash])</b></td><td>Create a new instance by passing in a string id or Element object.</td></tr>
+			<tr class="odd"><td>void</td><td><b>addTab(link Element)</b></td><td>Add a link Element object to the list of tabs.</td></tr>
+			<tr class="even"><td>void</td><td><b>setActiveTab(mixed element_id)</b></td><td>Set the active tab by a link id string, or a link Element object.</td></tr>
+			<tr class="odd"><td>void</td><td><b>next()</b></td><td>Calls setActiveTab() on the next tab.</td></tr>
+			<tr class="even"><td>void</td><td><b>previous()</b></td><td>Calls setActiveTab() on the previous tab.</td></tr>
+			<tr class="odd"><td>void</td><td><b>first()</b></td><td>Calls setActiveTab() on the first tab.</td></tr>
+			<tr class="even"><td>void</td><td><b>last()</b></td><td>Calls setActiveTab() on the last tab.</td></tr>
+			<tr class="odd"><td>Element</td><td><b>activeContainer</b></td><td>Contains the currently active container element.</td></tr>
+			<tr class="even"><td>Element</td><td><b>activeLink</b></td><td>Contains the currently active link element.</td></tr>
+		</tbody>
+	</table>
+	
+	<h3>Options</h3>
+	<table cellpadding="0" cellspacing="0" width="100%" class="api_table">
+		<thead>
+			<tr><td>Type</td><td>Name</td><td>Default</td><td>Description</td></tr>
+		</thead>
+		<tbody>
+			<tr class="even"><td>function</td><td><b>beforeChange</b></td><td>empty function</td><td>Called before a tab changes.</td></tr>
+			<tr class="odd"><td>function</td><td><b>afterChange</b></td><td>empty function</td><td>Called before a tab changes.</td></tr>
+			<tr class="even"><td>boolean</td><td><b>hover</b></td><td>false</td><td>Should the tabs change when the mouse hovers over a link instead of clicking.</td></tr>
+			<tr class="odd"><td><nobr>string || function</nbor></td><td><b>linkSelector</b></td><td>'li a'</td><td>CSS selector that matches a link inside the list of tabs.</td></tr>
+			<tr class="even"><td>boolean</td><td><b>setClassOnContainer</b></td><td>false</td><td>Wether to set the activeClassName to the link, or it's parent element.</td></tr>
+			<tr class="odd"><td>string</td><td><b>activeClassName</b></td><td>'active'</td><td>The class name added to the active link</td></tr>
+			<tr class="even"><td>string</td><td><b>defaultTab</b></td><td>'first'</td><td>Which tabs starts as active. Can be 'first', 'last' or any link id string.</td></tr>
+			<tr class="odd"><td>boolean</td><td><b>autoLinkExternal</b></td><td>true</td><td>Wether to have links that point to containers in the tab list, but are outside of it, control the tabs instance.</td></tr>
+			<tr class="even"><td>RegExp</td><td><b>targetRegExp</b></td><td>/#(.+)$/</td><td>The RegExp object that will be used to match link hrefs inside the list.</td></tr>
+		</tbody>
+	</table>
+	
+	<h3>Events</h3>
+	<p>All events can be passed in as an option, or if <a href="http://livepipe.net/projects/object_event/">Object.Event</a> has been included, they can be observed by calling Control.Tabs.observe() to observe all instances, or by calling observe() on any particular instance to just observe that one.</p>
+	<table cellpadding="0" cellspacing="0" width="100%" class="api_table">
+		<thead>
+			<tr><td>Name</td><td>Description</td></tr>
+		</thead>
+		<tbody>
+			<tr class="even"><td><b>beforeChange(old_container Element)</b></td><td>Element is the old container Element object.</td></tr>
+			<tr class="odd"><td><b>afterChange(new_container Element)</b></td><td>Element is the new container Element object.</td></tr>
+		</tbody>	
+	</table>	
+	
+	<h3>Advanced Usage Examples</h3>
+<pre class="highlighted"><code class="javascript">//with no options
+var tabs = new Control.Tabs($('my_list_of_tabs'));
+
+//with all available options. these are the defaults
+tabs = new Control.Tabs($('my_list_of_tabs'),{
+    defaultTab: 'last',
+    linkSelector: 'li span a',
+    activeClassName: 'active_tab',
+    beforeChange: function(old_container){
+
+    }
+});
+
+//to programatically set the active tab
+tabs.setActiveTab($('link_object'));
+//or by the link id
+tabs.setActiveTab('one');
+
+//or programatically set to these special cases
+tabs.first(); //sets the first tab to active
+tabs.last(); //sets the last tab to active
+tabs.next(); //sets the next tab to active (unless last tab is already active)
+tabs.previous(); //sets the previous tab to active (unless first tab is already active)
+
+//this property has a reference to the container that is being displayed
+var active_container = tabs.activeContainer;
+active_container.update('some new HTML');
+
+//this property has a reference to the active link
+var active_link = tabs.activeLink;
+
+Control.Tabs.instances.length; //should be 1
+Control.Tabs.findByTabId('one').setActiveTab('two');
+
+//using Object.Event
+Control.Tabs.observe('beforeChange',function(control_tabs_instance,old_container){
+    //this is called whenever any Control.Tabs instance changes
+});
+tabs.observe('beforeChange',function(old_container){
+    //this is called whenever our "tabs" instance changes
+});</code></pre>
+	
+	
+</div>
+
+<div id="resources">
+	<h3>RSS Changelog</h3>
+	<p>Is available at <b>http://livepipe.net/projects/control_tabs/changelog.rss</b></p>
+	<h3>Downloads &amp; SVN</h3>
+	<p>The new 2.0 version is available via the button in the upper right. It introduces a backwards compatibility break with 1.0 by removing the responders functionality. This functionality is superseded by using the <a href="http://livepipe.net/projects/object_event/">Object.Event</a> library.</p>
+	<p>The Control Suite subversion repository is available at: <b>svn://livepipe.net/control_suite/</b></p>
+	<p>The last 1.0 series release is available at <a href="http://livepipe.net/downloads/control.tabs.1.6.0.js">http://livepipe.net/downloads/control.tabs.1.6.0.js</a></p>
+	<h3>Online Forum</h3>
+	<p>Do you have questions, bug reports or suggestions? Visit the <a href="http://livepipe.net/community/control_tabs/">Control.Tabs online forum</a>.</p>
+	<h3>Other Resources</h3>
+	<p>Have you written a post or article about Control.Tabs? Please <a href="http://livepipe.net/contact">contact me</a>!</p>
+	<ul>
+		<li><a href="http://blog.circlesixdesign.com/2007/05/28/tab-history/">Ajax Usability: Tab History</a></li>
+	</ul>
+</div>
+
+<script>
+	new Control.Tabs('main_tabs');
+</script>					</div>
+				</div>
+				<div id="footer">
+					<p>&copy; LivePipe&trade; LLC 2007</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

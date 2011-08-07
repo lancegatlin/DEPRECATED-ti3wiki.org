@@ -1,0 +1,124 @@
+<html>
+<head>
+		<link rel="stylesheet" href="http://livepipe.net/styles/screen.css"/>
+		<script src="http://livepipe.net/scripts/prototype.js"></script>
+		<script src="control.tabs.js"></script>
+
+</head>
+<body>
+<style>
+ul.subsection_tabs {
+	list-style:none;
+	margin:0;
+	padding:0;
+	clear:both;
+	border-bottom:1px solid #ccc;
+	height:20px;
+	clear:both;
+}
+
+ul.subsection_tabs li {
+	float:left;
+	margin-right:7px;
+	text-align:center;
+}
+
+ul.subsection_tabs li a {
+	display:block;
+	height:20px;
+	padding:0 6px 0 6px;
+	background-color:#fff;
+	color:#666;
+	width:80px;
+}
+
+ul.subsection_tabs li a:hover {
+	color:#666;
+}
+
+ul.subsection_tabs li a.active {
+	background-color:#ddd;
+}
+</style>
+
+<ul class="subsection_tabs" id="main_tabs" style="clear:none;">
+	<li><a href="#tutorial">Tutorial</a></li>
+	<li><a href="#api">API</a></li>
+	<li><a href="#resources">Resources</a></li>
+</ul>
+<div id="tutorial">
+	<ul id="tabs_example_one" class="subsection_tabs">
+		<li><a href="#one">One</a></li>
+
+		<li><a href="#two">Two</a></li>
+	</ul>
+	<div id="one"><p>This is the simplest example of a set of tabs.</p></div>
+	<div id="two"><p>Note that the styling for the tabs is done with CSS, not the Control.Tabs script.</p></div>
+	<script>
+		new Control.Tabs('tabs_example_one');
+	</script>
+	
+<style>
+		.tabbed_images {
+			list-style:none;
+			margin:0;
+			padding:0;
+			clear:both;
+		}
+		
+		.tabbed_images li {
+			list-style:none;
+			float:left;
+			margin:0;
+			padding:0;
+		}
+		
+		.tabbed_images li a {
+			border:1px solid #ccc;
+			display:block;
+			float:left;
+			margin:0 10px 0 0;
+		}
+		
+		.tabbed_images li a.active,
+		.tabbed_images li a:hover {
+			border:1px solid #333;
+		}
+		
+		.tabbed_images li a img {
+			border:none;
+			padding:2px;
+			margin:0;
+		}
+		
+		#image_1,
+		#image_2,
+		#image_3,
+		#image_4,
+		#image_5 {
+			margin-top:10px;
+			padding:2px;
+			border:1px solid #ccc;
+		}
+	</style>
+	<ul class="tabbed_images" id="tabs_example_3">
+		<li><a href="#image_1"><img src="http://livepipe.net/styles/sample_images/tabs_example_1_small.jpg"/></a></li>
+
+		<li><a href="#image_2"><img src="http://livepipe.net/styles/sample_images/tabs_example_2_small.jpg"/></a></li>
+		<li><a href="#image_3"><img src="http://livepipe.net/styles/sample_images/tabs_example_3_small.jpg"/></a></li>
+		<li><a href="#image_4"><img src="http://livepipe.net/styles/sample_images/tabs_example_4_small.jpg"/></a></li>
+	</ul>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_1_big.jpg" id="image_1"/>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_2_big.jpg" id="image_2"/>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_3_big.jpg" id="image_3"/>
+	<img src="http://livepipe.net/styles/sample_images/tabs_example_4_big.jpg" id="image_4"/>
+	<script>
+		new Control.Tabs('tabs_example_3')
+	</script>
+</div>
+<div id="api">blah</div>
+</body>
+<script>
+	new Control.Tabs('main_tabs');
+</script>
+</html>

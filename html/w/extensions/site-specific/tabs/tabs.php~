@@ -1,0 +1,96 @@
+<?php
+if( !defined( 'MEDIAWIKI' ) ) {
+  die( "This file is part of MediaWiki and is not a valid entry point\n" );
+}
+#install extension hook
+$wgExtensionFunctions[] = "JS_Control_Tabs";
+
+$wgExtensionCredits['JS_Control_Tabs'][]= array(
+					  'name'         => 'Custom Tabbed Panels MediaWiki Mod', 
+					  'url'          => 'http://livepipe.net/projects/control_tabs/', 
+					  );
+
+// Add JavaScript
+function JS_Control_tabs() { 
+	global $wgOut,$wgParser;
+	
+	// Insert javascript script that hooks the java script
+	$wgOut->addScript("<script type=\"text/javascript\" src=\"/extensions/tabs/prototype.js\"></script>\n");
+	$wgOut->addScript("<script type=\"text/javascript\" src=\"/extensions/tabs/control.tabs.js\"></script>\n");
+
+	$wgParser->setHook('tabs','tabsTag');
+	$wgParser->setHook('tabscript','tabscriptTag');
+	return;
+}
+
+function tabsTag($text, $params, &$parser)
+{
+	if($params['class'] == null)
+		$params['class'] = 'tabs';
+		
+	$p = '';
+	foreach($params as $k=>$v)
+		$p .= ' ' . $k . '="' . $v . '"';
+	
+	$retv = "\n<ul$p>\n";
+//	$retv[1] = "<script>document.write('<style>";
+	
+	$ptext = Parser::extractTagsAndParams(
+					   array('tab')
+					   ,$text
+					   ,$matches );	
+					   
+	foreach($matches as $k => $i)
+	{
+		$tag = $i[0];
+		$content = $i[1];
+		$args = $i[2];
+		$fulltag = $i[3];
+		
+		if($tag == 'tab')
+		{
+			$content = $parser->recursiveTagParse($content);
+			$id = $args['id'] == null ? $content : $args['id'];
+			$retv .= "\t<li><a href=\"#$id\">$content</a></li>\n";
+/*			if($last_tab_id != null)
+			{
+				if($at_least_second_tab)
+					$retv[1] .= ' ,';
+				$retv[1] .= "#$id";
+				$at_least_second_tab = true;
+			}*/
+			$last_tab_id = $id;
+		}
+/*		else
+		if($tag == 'div')
+		{
+			if($args['id'] == null)
+				$args['id'] = $last_tab_id;
+			
+			$p = '';
+			foreach($args as $k=>$v)
+				$p .= ' ' . $k . '="' . $v . '"';
+				
+			$retv[2] .= "<div$p>" . $parser->recursiveTagParse($content) . "</div>\n";
+//			$retv[1] .= "\t<div$p>\n\t\t" . $content . "\n\t</div>\n";
+		}*/
+	}
+	
+	$retv .= "</ul>\n";
+//	$retv[1] .= "{ display:none; }</style>');</script>";
+//	$retv[3] = "<script type=\"text/javascript\">new Control.Tabs('" . $tab_id . "');</script>";
+	
+/*	foreach($retv as $v)
+		$final .= $v;*/
+	
+	return $retv;
+}
+
+function tabscriptTag($text, $params, &$parser)
+{
+	$tab_id = htmlentities($params['id']);
+	
+	return "<script type=\"text/javascript\">new Control.Tabs('" . $tab_id . "');</script>";
+}
+
+?>

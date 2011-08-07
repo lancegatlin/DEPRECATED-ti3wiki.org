@@ -1,18 +1,35 @@
 #!/bin/bash
-# Change to wiki directory
-cd html/w
 
+# Change to html directory
+cd html
+
+# Wikimap Images
+echo DOWNLOADING: Wikimap Images
+curl -Lk https://github.com/lancegatlin/TI3WikiMap-Images/tarball/v0.\
+1.\
+0 | tar zx
+mv lancegatlin-TI3WikiMap-Images* wikimap
+
+# Change to wiki directory
+cd w
 
 # Get mediawiki 1.16.5
 echo DOWNLOADING: Mediawiki 1.16.5...
 curl -Lk http://download.wikimedia.org/mediawiki/1.16/mediawiki-1.16.5.tar.gz | tar zx
 cp -R mediawiki-1.16.5/* .
 rm -rf mediawiki-1.16.5
-
 cp LocalSettings.db.pwd.template LocalSettings.db.pwd
-echo REMEMBER: Edit LocalSettings.pwd and set server database password
 
-# TODO: Get ti3wiki test SQL and test images, import them
+# Get skin
+cd skins
+echo DOWNLOADING: TI3 Skin
+curl -Lk https://github.com/lancegatlin/MediaWiki-Skin--TI3Wiki/tarball/v0.\
+1.\
+0 | tar zx
+mv lancegatlin-MediaWiki-Skin--TI3Wiki* ti3skin
+cp -R ti3skin/* .
+rm -rf ti3skin
+cd ..
 
 # Get extensions
 cd extensions
@@ -74,7 +91,6 @@ curl -Lk https://github.com/lancegatlin/MediaWiki-Extension--Secure/tarball/v0.\
 2 | tar zx
 mv lancegatlin-MediaWiki-Extension--Secure* Secure
 cp Secure/secure.pwd.template Secure/secure.pwd
-echo REMEMBER: Edit secure.pwd.template and set server password
 
 # Navigate back to wiki directory
 cd ..
@@ -87,3 +103,8 @@ chmod 770 cache
 
 # Navigate back to deploy directory
 cd ../../
+
+echo REMINDER: Create database, database user and import wiki data
+echo REMINDER: Edit LocalSettings.pwd and set server database password
+echo REMINDER: Edit secure.pwd.template and set server password
+echo REMINDER: mw_ti3wiki-test.sql contains test wiki data

@@ -1,5 +1,5 @@
 <?php
-require_once( 'extensions/recaptcha/ReCaptcha.php' );
+#require_once( 'extensions/recaptcha/ReCaptcha.php' );
 // Sign up for these at http://recaptcha.net/api/getkey
 $recaptcha_public_key = '6LfEdAEAAAAAAA2l_HqdW7oFe5oKEYxLECMGclxj';
 $recaptcha_private_key = '6LfEdAEAAAAAAFVLgZkQemF_00TRLDd7VzkCxIXg';
